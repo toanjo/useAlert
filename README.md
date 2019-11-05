@@ -1,4 +1,4 @@
-# useAlert
+# useAlert - in development
 WIP - Custom React Hook for showing Bootstrap Alerts
 
 Usage example:
