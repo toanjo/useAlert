@@ -19,10 +19,16 @@ const [alertState, alertApi] = useAlert("alertsRoot", classes); // Get the alert
 
 ## API
 
-- show(type, message)
+- show(type, message, action)
+	**action** is an optional parameter intended for adding links to the end of the alert message.
 - hide()
 
 ```javascript
+
+  const action = {
+    text: 'with a link',
+    url: 'https://google.com'
+  }
 
   <button className="btn" onClick={() => alertApi.show('success','This is a success Message')}>Show success</button>
   <button className="btn" onClick={() => alertApi.show('warning','This is a warning Message')}>Show warning</button>
