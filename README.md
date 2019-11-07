@@ -30,7 +30,7 @@ const [alertState, alertApi] = useAlert("alertsRoot", classes); // Get the alert
     url: 'https://google.com'
   }
 
-  <button className="btn" onClick={() => alertApi.show('success','This is a success Message')}>Show success</button>
+  <button className="btn" onClick={() => alertApi.show('success','This is a success Message', action)}>Show success</button>
   <button className="btn" onClick={() => alertApi.show('warning','This is a warning Message')}>Show warning</button>
   <button className="btn" onClick={() => alertApi.show('danger','This is a danger Message')}>Show danger</button>
   <button className="btn" onClick={() => alertApi.hide()}>Hide</button>
