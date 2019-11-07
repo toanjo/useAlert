@@ -5,12 +5,15 @@ export const useAlert = (parentElementID, classes) => {
 
     const [visible, setVisible] = useState(false);
     const [type, setType] = useState("success");
-    const [message, setMessage] = useState("Default Message");
+    const [message, setMessage] = useState({
+        text: 'Default Message',
+        action: null
+    });
 
     const template = (type, message, visible) => {
         return (
             <div className={classes+ " alert alert-"+type+" alert-dismissible fade show"} id="alert" role="alert" style={visible ? {display:'block'} : {display:'none'}}>
-                <div> {message} </div>
+                <div> {message.text} {message.action && <a href={message.action.url} target="_blank">{message.action.text}</a>}</div>
                 <button
                     type="button"
                     className="close"
@@ -25,21 +28,25 @@ export const useAlert = (parentElementID, classes) => {
 
     useEffect(() => {
         render(template(type, message, visible), document.getElementById(parentElementID));
-
         return () => {
             document.getElementById("alert").remove();
         }
     }, [])
 
     useEffect(() => {
+        render(template(type, message, visible), document.getElementById(parentElementID));
+    }, [message])
 
-    }, [type, message])
-
-    const show = useCallback((type, message) => {
+    const show = useCallback((type, text, action = null) => {
         setType(type);
-        setMessage(message);
         setVisible(true);
-        render(template(type, message, true), document.getElementById(parentElementID));
+        setMessage({
+            text: text,
+            action: action ? {
+                text: action.text,
+                url: action.url
+            } : null
+        });
     })
 
     const hide = useCallback(() => {
