@@ -10,7 +10,15 @@ export const useAlert = (parentElementID, classes) => {
     const template = (type, message, visible) => {
         return (
             <div className={classes+ " alert alert-"+type+" alert-dismissible fade show"} id="alert" role="alert" style={visible ? {display:'block'} : {display:'none'}}>
-            {message}
+                <div> {message} </div>
+                <button
+                    type="button"
+                    className="close"
+                    onClick={() => {
+                        hide();
+                    }}>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         )
     }
