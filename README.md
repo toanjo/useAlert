@@ -7,12 +7,12 @@ import { useAlert } from './useAlert';
 
 ...
 
-const classes = "mx-2 p-4" // String of custom classes to add to the alert element
-const [alertState, alertApi] = useAlert("alertsRoot", classes); // Get the alert state (type, message, visibility) and API
+const classes = "mx-2 p-4" // String of custom classes to add to the alert element, optional parameter
+const [alertState, alertApi] = useAlert("alertsElement", classes); // Access the alert state (type, message, visibility) and API
 
 ...
 
-<div id="alertsRoot">
+<div id="alertsElement">
 </div>
 
 ```
