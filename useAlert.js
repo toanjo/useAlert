@@ -29,7 +29,7 @@ export const useAlert = (parentElementID, classes = "") => {
     useEffect(() => {
         render(template(type, message, visible), document.getElementById(parentElementID));
         return () => {
-            document.getElementById("alert").remove();
+            document.getElementById(parentElementID).remove();
         }
     }, [])
 
