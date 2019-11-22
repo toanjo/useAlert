@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { render } from 'react-dom';
 
+import { Alert, Button } from './styles';
+
 export const useAlert = (parentElementID, classes = "") => {
 
     const [visible, setVisible] = useState(false);
@@ -10,31 +12,34 @@ export const useAlert = (parentElementID, classes = "") => {
         action: null
     });
 
-    const template = (type, message, visible) => {
+    const my_template = (type, message, visible) => {
         return (
-            <div className={classes+" alert alert-"+type+" alert-dismissible fade show"} id="alert" role="alert" style={visible ? {display:'block'} : {display:'none'}}>
-                <div> {message.text} {message.action && <a href={message.action.url} target="_blank">{message.action.text}</a>}</div>
-                <button
-                    type="button"
-                    className="close"
+            <Alert type={type} visible={visible} className={classes ? `${classes}` : ''}>
+                <div> 
+                    {message.text} 
+                    {message.action && <a href={message.action.url} target="_blank" rel="noopener noreferrer">
+                        {message.action.text}
+                    </a>}
+                </div>
+                <Button 
                     onClick={() => {
                         hide();
                     }}>
                     <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                </Button>
+            </Alert>
         )
     }
 
     useEffect(() => {
-        render(template(type, message, visible), document.getElementById(parentElementID));
+        render(my_template(type, message, visible), document.getElementById(parentElementID));
         return () => {
             document.getElementById(parentElementID).remove();
         }
     }, [])
 
     useEffect(() => {
-        render(template(type, message, visible), document.getElementById(parentElementID));
+        render(my_template(type, message, visible), document.getElementById(parentElementID));
     }, [message])
 
     const show = useCallback((type, text, action = null) => {
@@ -51,7 +56,7 @@ export const useAlert = (parentElementID, classes = "") => {
 
     const hide = useCallback(() => {
         setVisible(false);
-        render(template(type, message, false), document.getElementById(parentElementID));
+        render(my_template(type, message, false), document.getElementById(parentElementID));
     })
 
     const state = {
